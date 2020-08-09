@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -30,9 +31,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static const color_1 = Color(0xFFC41A3B);
-  static const color_2 = Color(0xFFFBE0E6);
-  static const color_3 = Color(0xFF1B1F32);
+  static bool isSwitched = false;
+
+  static var color_1 = (isSwitched)?Color(0xFFC41A3B):Color(0xDD4E342E);
+  static var color_2 = (isSwitched)?Color(0xFFFBE0E6):Color(0xDD8D6E63);
+  static var color_3 = Color(0xFF1B1F32);
+  var changeMode = "Dark Mode";
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +57,14 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 100,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 40),
-                  child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold),),
+                SizedBox(height: 80,),
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40),
+                      child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 70, fontWeight: FontWeight.bold),),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 10,),
                 Padding(
@@ -65,7 +74,6 @@ class _MyAppState extends State<MyApp> {
                 SizedBox(height: 60,),
                 Expanded(
                   child: Container(
-
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -126,12 +134,12 @@ class _MyAppState extends State<MyApp> {
                                   Spacer(),
                                   Container(
                                     width: double.infinity,
-                                    padding: EdgeInsets.only(right: 18, left: 18, bottom: 60),
+                                    padding: EdgeInsets.only(right: 18, left: 18, bottom: 10),
                                     child: ButtonTheme(
                                       height: 50,
                                       child: RaisedButton(
                                         elevation: 20,
-                                        color: Color(0xFFC41A3B),
+                                        color: color_1,
                                         onPressed: (){},
                                         child: Text('SIGN IN', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
                                         shape: RoundedRectangleBorder(
@@ -144,6 +152,32 @@ class _MyAppState extends State<MyApp> {
                                         ),
                                       ),
                                     ),
+                                  ),
+                                  Container(
+                                      //color: Colors.red,
+                                      padding: EdgeInsets.only(right: 25),
+                                      //alignment: Alignment.topRight,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text(changeMode, style: TextStyle(color: color_1, fontSize: 15, fontStyle: FontStyle.italic),),
+                                          ButtonTheme(
+                                            child: Switch(
+                                              value: isSwitched,
+                                              onChanged: (value){
+                                                setState(() {
+                                                  isSwitched = !isSwitched;
+                                                  color_1 = (isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
+                                                  color_2 = (isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
+                                                  changeMode = (isSwitched)?"Light Mode":"Dark Mode";
+                                                });
+                                              },
+                                              activeTrackColor: color_2,
+                                              activeColor: color_1,
+                                            ),
+                                          )
+                                        ],
+                                      )
                                   )
                                 ],
                               )
