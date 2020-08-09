@@ -60,13 +60,19 @@ class _MyAppState extends State<MyApp> {
               children: <Widget>[
                 SizedBox(height: 80,),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(left: 40),
                       child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 70, fontWeight: FontWeight.bold),),
                     ),
+                    Container(
+                      width: 100,
+                      height: 100,
+                      margin: EdgeInsets.only(right: 30),
+                      child: CircleImage(pathImages: 'images/ThiemAvatar.jpg',sizeOfImage: 300,),
+                    )
                   ],
-
                 ),
                 SizedBox(height: 10,),
                 Padding(
