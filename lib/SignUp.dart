@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'CircleImage.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -54,15 +55,41 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 80,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 40),
-                  child: Text("Sign Up", style: TextStyle(fontSize: 60, color: Colors.white, fontWeight: FontWeight.bold),),
-                ),
-                SizedBox(height: 10,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 45),
-                  child: Text('Create Your Account !!', style: TextStyle(fontSize: 20, color: Colors.white, fontStyle: FontStyle.italic),),
+                SizedBox(height: 50,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: Text("Sign Up", style: TextStyle(fontSize: 61, color: Colors.white, fontWeight: FontWeight.bold),),
+                        ),
+                        SizedBox(height: 15,),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 45),
+                          child: Text('Create Your Account !!', style: TextStyle(fontSize: 20, color: Colors.white, fontStyle: FontStyle.italic),),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 50),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          //CircleImage(pathImages: 'images/logo.jpg',sizeOfImage: 100,),
+                          Container(
+                            height: 100 ,
+                            width: 80,
+                            child: Image.asset('images/logo.jpg'),
+                          ),
+                          SizedBox(height: 0.0,),
+                          Text('NashTech VietNam', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18 ),)
+                        ],
+                      ),
+                    )
+                  ],
                 ),
                 Expanded(
                   child: Container(
