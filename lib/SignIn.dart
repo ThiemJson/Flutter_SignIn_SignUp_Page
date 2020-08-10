@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +35,7 @@ class _MyAppState extends State<MyApp> {
 
   static var color_1 = (isSwitched)?Color(0xFFC41A3B):Color(0xDD4E342E);
   static var color_2 = (isSwitched)?Color(0xFFFBE0E6):Color(0xDD8D6E63);
-  static var color_3 = Color(0xFF1B1F32);
+  //static var color_3 = Color(0xFF1B1F32);
   var changeMode = "Dark Mode";
 
 
