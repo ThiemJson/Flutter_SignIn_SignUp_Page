@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 import 'SignIn.dart';
 import 'SignUp.dart';
-
-void main()=>runApp(SignUp());
+import 'categories_page.dart';
+void main()=>runApp(CategoriesPage());

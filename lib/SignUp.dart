@@ -49,20 +49,19 @@ class _MyAppState extends State<MyApp> {
   var _SignUp_UserMobileNumberController = TextEditingController();
   var _SignUp_UserPassController = TextEditingController();
 
+  final formKey = GlobalKey<FormState>();
 
   void _SignUp_ButtonSignUpOnpress(){
 
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height,
-            maxWidth: MediaQuery.of(context).size.width,
+            minHeight: MediaQuery.of(context).size.height,
+            minWidth: MediaQuery.of(context).size.width,
           ),
           child: Container(
             height: MediaQuery.of(context).size.height,
@@ -111,8 +110,6 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Expanded(
                     child: Container(
-                      height: MediaQuery.of(context).size.height/1.2,
-                      width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.only(top: 50),
                       decoration: BoxDecoration(
                           color: color_2,
@@ -124,190 +121,189 @@ class _MyAppState extends State<MyApp> {
                         )
                       ),
                       child: Padding(
-                        padding: EdgeInsets.only(right: 90, left: 50, top: 20),
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(height: 20,),
-                            Container( // Person
-                              width: double.infinity,
-                              height: 55,
-                              decoration: BoxDecoration(
-                                color: color_1,
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(25),
-                                  bottomLeft: Radius.circular(25),
-                                  topLeft: Radius.circular(15),
-                                  bottomRight: Radius.circular(15),
-                                )
-                              ),
-                              child: TextFormField(
+                        padding: EdgeInsets.only(right: 90, left: 50, top: 0),
+                        child: Form(
+                          key: formKey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(height: 20,),
+                              TextFormField(
                                 controller: _SignUp_UserNameController,
                                 style: TextStyle(color: Colors.white, fontSize: 18),
-                                onChanged: (text){
+                                onSaved: (text){
                                   setState(() {
                                     _SignUp_txt_UserName = text;
                                   });
                                 },
                                 decoration: InputDecoration(
-                                  border: InputBorder.none,
+                                  fillColor: color_1,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: color_1),
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(25),
+                                      bottomLeft: Radius.circular(25),
+                                      topLeft: Radius.circular(15),
+                                      bottomRight: Radius.circular(15),
+                                    )
+                                  ),
                                   prefixIcon: Icon(Icons.person, color: Colors.white,),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                                  contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
                                   hintText: 'Account name',
                                   hintStyle: TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
-
                                 ),
+                                validator: (_SignUp_txt_UserName)=>_SignUp_txt_UserName.contains('@')?"Not a usernam":null,
                               ),
-                            ),
-                            SizedBox(height: 15,),
-                            Container( // Email address
-                              width: double.infinity,
-                              height: 55,
-                              decoration: BoxDecoration(
-                                  color: color_1,
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(25),
-                                    bottomLeft: Radius.circular(25),
-                                    topLeft: Radius.circular(15),
-                                    bottomRight: Radius.circular(15),
-                                  )
-                              ),
-                              child: TextFormField(
+                              SizedBox(height: 15,),
+                              TextFormField(
                                 controller: _SignUp_UserEmailController,
                                 style: TextStyle(color: Colors.white, fontSize: 18),
-                                onChanged: (text){
-                                 setState(() {
-                                   _SignUp_txt_UserEmail = text;
-                                 });
+                                onSaved: (text){
+                                  setState(() {
+                                    _SignUp_txt_UserEmail = text;
+                                  });
                                 },
                                 decoration: InputDecoration(
-                                  border: InputBorder.none,
+                                  fillColor: color_1,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color_1),
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(25),
+                                        bottomLeft: Radius.circular(25),
+                                        topLeft: Radius.circular(15),
+                                        bottomRight: Radius.circular(15),
+                                      )
+                                  ),
                                   prefixIcon: Icon(Icons.email, color: Colors.white,),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                                  hintText: 'Email Address',
-                                  hintStyle: TextStyle(color: Colors.white54, fontStyle: FontStyle.italic , ),
+                                  contentPadding: EdgeInsets.symmetric(vertical: 000, horizontal: 15),
+                                  hintText: 'Email address',
+                                  hintStyle: TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
                                 ),
-
+                                validator: (_SignUp_txt_UserEmail)=>_SignUp_txt_UserEmail.contains('@')?"Not a usernam":null,
                               ),
-                            ),
-                            SizedBox(height: 15,),
-                            Container( // Phone Number
-                              width: double.infinity,
-                              height: 55,
-                              decoration: BoxDecoration(
-                                  color: color_1,
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(25),
-                                    bottomLeft: Radius.circular(25),
-                                    topLeft: Radius.circular(15),
-                                    bottomRight: Radius.circular(15),
-                                  )
-                              ),
-                              child: TextFormField(
+                              SizedBox(height: 15,),
+                              TextFormField(
                                 controller: _SignUp_UserMobileNumberController,
                                 style: TextStyle(color: Colors.white, fontSize: 18),
-                                onChanged: (text){
+                                onSaved: (text){
                                   setState(() {
                                     _SignUp_txt_UserMobileNumber = text;
                                   });
                                 },
                                 decoration: InputDecoration(
-                                  border: InputBorder.none,
+                                  fillColor: color_1,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color_1),
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(25),
+                                        bottomLeft: Radius.circular(25),
+                                        topLeft: Radius.circular(15),
+                                        bottomRight: Radius.circular(15),
+                                      )
+                                  ),
                                   prefixIcon: Icon(Icons.phone, color: Colors.white,),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                                  contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
                                   hintText: 'Mobile number',
                                   hintStyle: TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
                                 ),
+                                validator: (_SignUp_txt_UserMobileNumber)=>_SignUp_txt_UserMobileNumber.contains('@')?"Not a usernam":null,
                               ),
-                            ),
-                            SizedBox(height: 15,),
-                            Container( // Password
-                              width: double.infinity,
-                              height: 55,
-                              decoration: BoxDecoration(
-                                  color: color_1,
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(25),
-                                    bottomLeft: Radius.circular(25),
-                                    topLeft: Radius.circular(15),
-                                    bottomRight: Radius.circular(15),
-                                  )
-                              ),
-                              child: TextFormField(
+                              SizedBox(height: 15,),
+                              TextFormField(
                                 controller: _SignUp_UserPassController,
-                                obscureText: true,
                                 style: TextStyle(color: Colors.white, fontSize: 18),
-                                onChanged: (text){
+                                onSaved: (text){
                                   setState(() {
                                     _SignUp_txt_UserPass = text;
                                   });
                                 },
+                                obscureText: true,
                                 decoration: InputDecoration(
-                                  border: InputBorder.none,
+                                  fillColor: color_1,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color_1),
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(25),
+                                        bottomLeft: Radius.circular(25),
+                                        topLeft: Radius.circular(15),
+                                        bottomRight: Radius.circular(15),
+                                      )
+                                  ),
                                   prefixIcon: Icon(Icons.lock, color: Colors.white,),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                                  contentPadding: EdgeInsets.symmetric(vertical: 00, horizontal: 15),
                                   hintText: 'Password',
                                   hintStyle: TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
                                 ),
+                                validator: (_SignUp_txt_UserPass)=>_SignUp_txt_UserPass.contains('@')?"Not a usernam":null,
                               ),
-                            ),
-                            Spacer(),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  child: ButtonTheme(
-                                    minWidth: double.infinity,
-                                    height: 55,
-                                    child: RaisedButton(
-                                      onPressed: (){
-                                        setState(() {
-                                          _SignUp_ButtonSignUpOnpress();
-                                        });
-                                      },
-                                      color: color_1,
-                                      elevation: 25,
-                                      child: Text('SIGN UP', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 20),),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(25),
-                                          bottomLeft: Radius.circular(25),
-                                          topLeft: Radius.circular(15),
-                                          bottomRight: Radius.circular(15),
-                                        )
+                              Spacer(),
+                              Container(
+                                //height: 150,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      child: ButtonTheme(
+                                        minWidth: double.infinity,
+                                        height: 40,
+                                        child: RaisedButton(
+                                          onPressed: (){
+                                            print("trigger");
+                                            if(formKey.currentState.validate()){
+                                              formKey.currentState.save();
+
+                                            }
+                                          },
+                                          color: color_1,
+                                          elevation: 25,
+                                          child: Text('SIGN UP', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 20),),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(25),
+                                              bottomLeft: Radius.circular(25),
+                                              topLeft: Radius.circular(15),
+                                              bottomRight: Radius.circular(15),
+                                            )
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                SizedBox(height: 15,),
-                                Container(
-                                    margin: EdgeInsets.only(bottom: 30),
-                                    padding: EdgeInsets.only(right: 25),
-                                    //alignment: Alignment.topRight,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Text(changeMode, style: TextStyle(color: color_1, fontSize: 15, fontStyle: FontStyle.italic),),
-                                        ButtonTheme(
-                                          child: Switch(
-                                            value: isSwitched,
-                                            onChanged: (value){
-                                              setState(() {
-                                                isSwitched = !isSwitched;
-                                                color_1 = (isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
-                                                color_2 = (isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
-                                                changeMode = (isSwitched)?"Light Mode":"Dark Mode";
-                                              });
-                                            },
-                                            activeTrackColor: color_2,
-                                            activeColor: color_1,
-                                          ),
+                                    SizedBox(height: 8,),
+                                    Container(
+                                        margin: EdgeInsets.only(bottom: 0),
+                                        padding: EdgeInsets.only(right: 25),
+                                        //alignment: Alignment.topRight,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text(changeMode, style: TextStyle(color: color_1, fontSize: 15, fontStyle: FontStyle.italic),),
+                                            ButtonTheme(
+                                              child: Switch(
+                                                value: isSwitched,
+                                                onChanged: (value){
+                                                  setState(() {
+                                                    isSwitched = !isSwitched;
+                                                    color_1 = (isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
+                                                    color_2 = (isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
+                                                    changeMode = (isSwitched)?"Light Mode":"Dark Mode";
+                                                  });
+                                                },
+                                                activeTrackColor: color_2,
+                                                activeColor: color_1,
+                                              ),
+                                            )
+                                          ],
                                         )
-                                      ],
                                     )
-                                )
-                              ],
-                            ),
-                          ],
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
