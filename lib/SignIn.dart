@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'CircleImage.dart';
+import 'SignUp.dart';
 
 class SignIn extends StatefulWidget {
+  static bool isSwitched = true;
+  static const routeName = '/SignIn';
   @override
   _SignInState createState() => _SignInState();
 }
@@ -14,15 +17,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Color(0xFFC41A3B),
-        primaryColorLight: Color(0xFFFBE0E6),
-        accentColor: Color(0xFF1B1F32),
-      ),
-      home: MyApp(),
-    );
+    return MyApp();
   }
 }
 
@@ -32,11 +27,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static bool isSwitched = false;
+
   final formKey  = GlobalKey<FormState>();
 
-  static var color_1 = (isSwitched)?Color(0xFFC41A3B):Color(0xDD4E342E);
-  static var color_2 = (isSwitched)?Color(0xFFFBE0E6):Color(0xDD8D6E63);
+  static var color_1 = (SignIn.isSwitched)?Color(0xFFC41A3B):Color(0xDD4E342E);
+  static var color_2 = (SignIn.isSwitched)?Color(0xFFFBE0E6):Color(0xDD8D6E63);
   //static var color_3 = Color(0xFF1B1F32);
   var changeMode = "Dark Mode";
 
@@ -45,6 +40,22 @@ class _MyAppState extends State<MyApp> {
 
   final _SignIn_txt_UserName_Controller = TextEditingController();
   final _SignIn_txt_UserPass_Controller = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    color_1 = (SignIn.isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
+    color_2 = (SignIn.isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
+    changeMode = (SignIn.isSwitched)?"Light Mode":"Dark Mode";
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _SignIn_txt_UserName_Controller.dispose();
+    _SignIn_txt_UserPass_Controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +99,6 @@ class _MyAppState extends State<MyApp> {
                     )
                   ],
                 ),
-
                 SizedBox(height: 50,),
                 Expanded(
                   child: Container(
@@ -205,6 +215,7 @@ class _MyAppState extends State<MyApp> {
                                   ),
                                 //  Spacer(),
                                   SizedBox(height: 50,),
+                                  Spacer(),
                                   Container(
                                     width: double.infinity,
                                     padding: EdgeInsets.only(right: 18, left: 18, bottom: 10),
@@ -231,6 +242,20 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                   ),
                                   Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text('Dont have account ??', style: TextStyle(color: color_1),),
+                                        FlatButton(
+                                          child: Text('SIGN UP', style: TextStyle(color: color_1, fontWeight: FontWeight.bold, fontSize: 15),),
+                                          onPressed: (){
+                                            Navigator.pushNamed(context, SignUp.routeName);
+                                          },
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
                                       //color: Colors.red,
                                       padding: EdgeInsets.only(right: 25),
                                       //alignment: Alignment.topRight,
@@ -240,13 +265,13 @@ class _MyAppState extends State<MyApp> {
                                           Text(changeMode, style: TextStyle(color: color_1, fontSize: 15, fontStyle: FontStyle.italic),),
                                           ButtonTheme(
                                             child: Switch(
-                                              value: isSwitched,
+                                              value: SignIn.isSwitched,
                                               onChanged: (value){
                                                 setState(() {
-                                                  isSwitched = !isSwitched;
-                                                  color_1 = (isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
-                                                  color_2 = (isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
-                                                  changeMode = (isSwitched)?"Light Mode":"Dark Mode";
+                                                  SignIn.isSwitched = !SignIn.isSwitched;
+                                                  color_1 = (SignIn.isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
+                                                  color_2 = (SignIn.isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
+                                                  changeMode = (SignIn.isSwitched)?"Light Mode":"Dark Mode";
                                                 });
                                               },
                                               activeTrackColor: color_2,

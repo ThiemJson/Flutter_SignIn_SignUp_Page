@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_sigin_signup/ValidateInput.dart';
 import 'CircleImage.dart';
+import 'SignIn.dart';
 
 class SignUp extends StatefulWidget {
+  static const routeName = '/SignUp';
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -11,7 +13,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    /*return MaterialApp(
       title: 'Sign Up page',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -20,7 +22,8 @@ class _SignUpState extends State<SignUp> {
         accentColor: Color(0xFF1B1F32),
       ),
       home: MyApp(),
-    );
+    );*/
+    return MyApp();
   }
 }
 
@@ -31,10 +34,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static bool isSwitched = true;
-
-  static var color_1 = (isSwitched)?Color(0xFFC41A3B):Color(0xDD4E342E);
-  static var color_2 = (isSwitched)?Color(0xFFFBE0E6):Color(0xDD8D6E63);
+  static var color_1 = (SignIn.isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
+  static var color_2 = (SignIn.isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
   //static var color_3 = Color(0xFF1B1F32);
   var changeMode = "Dark Mode";
 
@@ -50,7 +51,23 @@ class _MyAppState extends State<MyApp> {
   var _SignUp_UserPassController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    color_1 = (SignIn.isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
+    color_2 = (SignIn.isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
+    changeMode = (SignIn.isSwitched)?"Light Mode":"Dark Mode";
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _SignUp_UserNameController.dispose();
+    _SignUp_UserPassController.dispose();
+    _SignUp_UserMobileNumberController.dispose();
+    _SignUp_UserEmailController.dispose();
+  }
   void _SignUp_ButtonSignUpOnpress(){
 
   }
@@ -91,28 +108,14 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 50),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            //CircleImage(pathImages: 'images/logo.jpg',sizeOfImage: 100,),
-                            Container(
-                              height: 70 ,
-                              width: 70,
-                              child: Image.asset('images/logo.jpg'),
-                            ),
-                            Text('NashTech VietNam', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15 ),)
-                          ],
-                        ),
-                      )
                     ],
                   ),
+                  SizedBox(height: 25,),
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(top: 50),
                       decoration: BoxDecoration(
-                          color: color_2,
+                          color: Colors.white,
                           borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(50),
                           topRight: Radius.circular(100),
@@ -121,7 +124,7 @@ class _MyAppState extends State<MyApp> {
                         )
                       ),
                       child: Padding(
-                        padding: EdgeInsets.only(right: 90, left: 50, top: 0),
+                        padding: EdgeInsets.only(right: 90, left: 50, top: 12),
                         child: Form(
                           key: formKey,
                           child: Column(
@@ -137,21 +140,21 @@ class _MyAppState extends State<MyApp> {
                                   });
                                 },
                                 decoration: InputDecoration(
-                                  fillColor: color_1,
+                                  fillColor: color_2,
                                   filled: true,
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: color_1),
+                                    borderSide: BorderSide.none,
                                     borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(25),
-                                      bottomLeft: Radius.circular(25),
-                                      topLeft: Radius.circular(15),
-                                      bottomRight: Radius.circular(15),
+                                      topRight: Radius.circular(15),
+                                      bottomLeft: Radius.circular(15),
+                                      topLeft: Radius.circular(0),
+                                      bottomRight: Radius.circular(0),
                                     )
                                   ),
-                                  prefixIcon: Icon(Icons.person, color: Colors.white,),
+                                  prefixIcon: Icon(Icons.person, color: color_1,),
                                   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
                                   hintText: 'Account name',
-                                  hintStyle: TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
+                                  hintStyle: TextStyle(color: color_1, fontStyle: FontStyle.italic),
                                 ),
                                 validator: (_SignUp_txt_UserName)=>_SignUp_txt_UserName.contains('@')?"Not a usernam":null,
                               ),
@@ -165,21 +168,21 @@ class _MyAppState extends State<MyApp> {
                                   });
                                 },
                                 decoration: InputDecoration(
-                                  fillColor: color_1,
+                                  fillColor: color_2,
                                   filled: true,
                                   border: OutlineInputBorder(
-                                      borderSide: BorderSide(color: color_1),
+                                      borderSide: BorderSide.none,
                                       borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(25),
-                                        bottomLeft: Radius.circular(25),
-                                        topLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(15),
+                                        topRight: Radius.circular(15),
+                                        bottomLeft: Radius.circular(15),
+                                        topLeft: Radius.circular(0),
+                                        bottomRight: Radius.circular(0),
                                       )
                                   ),
-                                  prefixIcon: Icon(Icons.email, color: Colors.white,),
+                                  prefixIcon: Icon(Icons.email, color: color_1,),
                                   contentPadding: EdgeInsets.symmetric(vertical: 000, horizontal: 15),
                                   hintText: 'Email address',
-                                  hintStyle: TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
+                                  hintStyle: TextStyle(color: color_1, fontStyle: FontStyle.italic),
                                 ),
                                 validator: (_SignUp_txt_UserEmail)=>_SignUp_txt_UserEmail.contains('@')?"Not a usernam":null,
                               ),
@@ -193,21 +196,21 @@ class _MyAppState extends State<MyApp> {
                                   });
                                 },
                                 decoration: InputDecoration(
-                                  fillColor: color_1,
+                                  fillColor: color_2,
                                   filled: true,
                                   border: OutlineInputBorder(
-                                      borderSide: BorderSide(color: color_1),
+                                      borderSide: BorderSide.none,
                                       borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(25),
-                                        bottomLeft: Radius.circular(25),
-                                        topLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(15),
+                                        topRight: Radius.circular(15),
+                                        bottomLeft: Radius.circular(15),
+                                        topLeft: Radius.circular(0),
+                                        bottomRight: Radius.circular(0),
                                       )
                                   ),
-                                  prefixIcon: Icon(Icons.phone, color: Colors.white,),
+                                  prefixIcon: Icon(Icons.phone, color: color_1,),
                                   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
                                   hintText: 'Mobile number',
-                                  hintStyle: TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
+                                  hintStyle: TextStyle(color: color_1, fontStyle: FontStyle.italic),
                                 ),
                                 validator: (_SignUp_txt_UserMobileNumber)=>_SignUp_txt_UserMobileNumber.contains('@')?"Not a usernam":null,
                               ),
@@ -222,21 +225,21 @@ class _MyAppState extends State<MyApp> {
                                 },
                                 obscureText: true,
                                 decoration: InputDecoration(
-                                  fillColor: color_1,
+                                  fillColor: color_2,
                                   filled: true,
                                   border: OutlineInputBorder(
-                                      borderSide: BorderSide(color: color_1),
+                                      borderSide: BorderSide.none,
                                       borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(25),
-                                        bottomLeft: Radius.circular(25),
-                                        topLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(15),
+                                        topRight: Radius.circular(15),
+                                        bottomLeft: Radius.circular(15),
+                                        topLeft: Radius.circular(0),
+                                        bottomRight: Radius.circular(0),
                                       )
                                   ),
-                                  prefixIcon: Icon(Icons.lock, color: Colors.white,),
+                                  prefixIcon: Icon(Icons.lock, color: color_1,),
                                   contentPadding: EdgeInsets.symmetric(vertical: 00, horizontal: 15),
                                   hintText: 'Password',
-                                  hintStyle: TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
+                                  hintStyle: TextStyle(color: color_1, fontStyle: FontStyle.italic),
                                 ),
                                 validator: (_SignUp_txt_UserPass)=>_SignUp_txt_UserPass.contains('@')?"Not a usernam":null,
                               ),
@@ -272,7 +275,12 @@ class _MyAppState extends State<MyApp> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 8,),
+                                    FlatButton(
+                                      child: Text('SIGN IN', style: TextStyle(color: color_1, fontWeight: FontWeight.bold, fontSize: 15),),
+                                      onPressed: (){
+                                        Navigator.pushNamed(context, SignIn.routeName);
+                                      },
+                                    ),
                                     Container(
                                         margin: EdgeInsets.only(bottom: 0),
                                         padding: EdgeInsets.only(right: 25),
@@ -283,13 +291,13 @@ class _MyAppState extends State<MyApp> {
                                             Text(changeMode, style: TextStyle(color: color_1, fontSize: 15, fontStyle: FontStyle.italic),),
                                             ButtonTheme(
                                               child: Switch(
-                                                value: isSwitched,
+                                                value: SignIn.isSwitched,
                                                 onChanged: (value){
                                                   setState(() {
-                                                    isSwitched = !isSwitched;
-                                                    color_1 = (isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
-                                                    color_2 = (isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
-                                                    changeMode = (isSwitched)?"Light Mode":"Dark Mode";
+                                                    SignIn.isSwitched = !SignIn.isSwitched;
+                                                    color_1 = (SignIn.isSwitched)?Color(0xFFC41A3B):Color(0xFF121212);
+                                                    color_2 = (SignIn.isSwitched)?Color(0xFFFBE0E6):Color(0xFFD6D6D6);
+                                                    changeMode = (SignIn.isSwitched)?"Light Mode":"Dark Mode";
                                                   });
                                                 },
                                                 activeTrackColor: color_2,
